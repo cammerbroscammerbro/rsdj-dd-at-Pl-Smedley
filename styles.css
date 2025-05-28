@@ -1,0 +1,391 @@
+body {
+    min-height: 100vh;
+    margin: 0;
+    font-family: 'Poppins', 'Orbitron', Arial, sans-serif;
+    background: #111;
+    color: #fff;
+}
+.fronti-headerbar {
+  width: 100vw;
+  background: #0a0a0e;
+  box-shadow: 0 2px 16px 0 rgba(0,0,0,0.10);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 0.7rem 0 0.7rem 0;
+  position: relative;
+  z-index: 10;
+}
+.simple-logo {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    margin: 0;
+    color: #fff;
+    text-shadow: none;
+    background: none;
+    border: none;
+    transform: none;
+    animation: none;
+}
+.fronti-title.simple-logo {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2.2em;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: 0.04em;
+  margin: 0 1.5rem 0 0;
+  text-shadow: 0 2px 12px #000a;
+}
+.header-search {
+  flex: 1 1 0%;
+  max-width: 520px;
+  min-width: 320px;
+  margin: 0 auto;
+  padding: 0.9em 1.5em;
+  font-size: 1.25em;
+  border-radius: 1.2em;
+  border: none;
+  background: #181a26;
+  color: #fff;
+  box-shadow: 0 2px 12px 0 rgba(0,0,0,0.10);
+  outline: none;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  transition: box-shadow 0.18s, background 0.18s;
+  display: block;
+}
+.fronti-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  min-height: 80vh;
+  background: linear-gradient(90deg, rgba(24,26,38,0.98) 0%, rgba(32,34,54,0.92) 220px, rgba(34,36,56,0.85) 340px, rgba(40,42,60,0.12) 100%);
+}
+.fronti-sidebar {
+  min-width: 170px;
+  max-width: 200px;
+  background: #0a0a0e;
+  border-radius: 1.2rem;
+  margin: 2.5rem 1.5rem 1.5rem 0;
+  padding: 2.2rem 0.7rem 2.2rem 0.7rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  box-shadow: 0 2px 16px 0 rgba(0,0,0,0.08);
+  height: fit-content;
+}
+.category-tabs {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  width: 100%;
+}
+.category-tabs .filter-btn {
+  width: 100%;
+  text-align: left;
+  padding: 0.7em 1.2em;
+  border-radius: 0.7em;
+  background: rgba(60, 60, 80, 0.18);
+  color: #e0e6f8;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.08em;
+  font-weight: 600;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s;
+}
+.category-tabs .filter-btn.active,
+.category-tabs .filter-btn:hover {
+  background: rgba(80, 120, 255, 0.18);
+  color: #fff;
+}
+.fronti-search-filter {
+  display: none !important;
+}
+.game-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.2rem;
+  padding: 2.5rem 1.5rem 1.5rem 1.5rem;
+  justify-items: center;
+}
+#gameGrid {
+  background: rgba(30,32,50,0.10);
+  border-radius: 1.2rem;
+  flex: 1 1 0%;
+  min-width: 0;
+  margin: 2.5rem 2.5rem 2.5rem 0;
+  box-shadow: 0 2px 16px 0 rgba(0,0,0,0.04);
+}
+.game-card {
+  width: 180px;
+  height: 180px;
+  background: rgba(30,30,30,0.85);
+  border-radius: 16px;
+  box-shadow: 0 2px 12px #0008;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 16px;
+  padding: 12px 6px 6px 6px;
+  cursor: pointer;
+  transition: transform 0.13s;
+}
+.game-card:hover {
+  transform: scale(1.07);
+  box-shadow: 0 4px 20px #000b;
+}
+.game-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 6px;
+  background: #222;
+  display: block;
+}
+.game-name {
+  font-size: 1.25em;
+  color: #fff;
+  text-align: center;
+  margin-top: 4px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  line-height: 1.1;
+  word-break: break-word;
+}
+.game-card .play-hover {
+    opacity: 0;
+    position: absolute;
+    bottom: 1.2em;
+    left: 0;
+    right: 0;
+    text-align: center;
+    color: #00f2fe;
+    font-weight: 600;
+    font-size: 1em;
+    transition: opacity 0.18s;
+    pointer-events: none;
+}
+.game-card:hover .play-hover {
+    opacity: 1;
+}
+/* Modal Styles */
+.game-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0; top: 0; right: 0; bottom: 0;
+    background: rgba(30, 34, 54, 0.85);
+    justify-content: center;
+    align-items: center;
+    padding: 2em 0.5em;
+}
+.game-modal.active {
+    display: flex;
+}
+.modal-content {
+    background: rgba(34, 40, 60, 0.98);
+    border-radius: 1.2em;
+    padding: 1.2em 1em 1em 1em;
+    max-width: 95vw;
+    width: 420px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.22);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.close-btn {
+    position: absolute;
+    top: 0.7em;
+    right: 1em;
+    font-size: 2em;
+    color: #fff;
+    cursor: pointer;
+    z-index: 2;
+    transition: color 0.2s;
+}
+.close-btn:hover {
+    color: #00f2fe;
+}
+#gameIframe {
+    width: 350px;
+    height: 480px;
+    border: none;
+    border-radius: 0.7em;
+    margin-top: 1.2em;
+    background: #111;
+}
+#fullscreenGameOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #111;
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+#fullscreenGameOverlay iframe {
+  flex: 1;
+  width: 98vw;
+  height: 80vh;
+  margin: 12px 0 0 0;
+  border-radius: 12px;
+  background: #000;
+}
+/* Overlay/Modal branding and close button highlight */
+#fullscreenGameOverlay .overlay-branding {
+  width: 100%;
+  background: #0a0a0e;
+  color: #fff;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.25em;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  padding: 1.1em 1.2em 0.7em 1.2em;
+  border-radius: 0 0 1.2em 1.2em;
+  text-align: center;
+  box-shadow: 0 2px 12px 0 #000a;
+}
+#fullscreenGameOverlay .overlay-header {
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.7em 2.5vw 0 2.5vw;
+}
+#fullscreenGameOverlay .overlay-game-title {
+  color: #fff;
+  font-size: 1.5em;
+  font-weight: 700;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 0.01em;
+  text-shadow: 0 2px 12px #000a;
+}
+#fullscreenGameOverlay .overlay-close {
+  background: #ff2d55;
+  color: #fff;
+  border: none;
+  font-size: 2.2em;
+  font-weight: 900;
+  padding: 0 22px;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 2px 12px 0 #ff2d5533;
+  transition: background 0.18s, color 0.18s, box-shadow 0.18s;
+  outline: 3px solid #fff2;
+  outline-offset: 2px;
+}
+#fullscreenGameOverlay .overlay-close:hover {
+  background: #fff;
+  color: #ff2d55;
+  box-shadow: 0 2px 18px 0 #ff2d55cc;
+}
+/* Placeholder card style */
+.game-card.placeholder {
+  background: rgba(40, 40, 60, 0.25);
+  border: 2px dashed rgba(120,120,160,0.18);
+  box-shadow: 0 2px 16px 0 rgba(0,0,0,0.08);
+  border-radius: 1.2rem;
+  width: 220px;
+  height: 270px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+  position: relative;
+}
+.game-card.placeholder .plus-icon {
+  font-size: 3.5em;
+  color: rgba(120,120,160,0.22);
+  margin-bottom: 0.3em;
+  user-select: none;
+}
+.game-card.placeholder .placeholder-text {
+  color: rgba(180,180,220,0.13);
+  font-size: 1.1em;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  user-select: none;
+}
+
+@media (max-width: 900px) {
+  .fronti-container {
+    flex-direction: column;
+    background: #181a26;
+  }
+  #gameGrid {
+    margin: 0 0 2.5rem 0;
+    border-radius: 0.8rem;
+  }
+  .fronti-sidebar {
+    flex-direction: row;
+    min-width: 0;
+    max-width: 100vw;
+    width: 100vw;
+    margin: 0 0 1.5rem 0;
+    padding: 1.2rem 0.5rem;
+    border-radius: 0.8rem;
+    box-shadow: none;
+    align-items: center;
+    justify-content: center;
+  }
+  .category-tabs {
+    flex-direction: row;
+    gap: 0.7rem;
+    width: 100vw;
+    justify-content: center;
+  }
+  .category-tabs .filter-btn {
+    width: auto;
+    min-width: 80px;
+    text-align: center;
+    padding: 0.6em 0.8em;
+    font-size: 1em;
+  }
+  .header-search {
+    min-width: 0;
+    width: 90vw;
+    font-size: 1.1em;
+  }
+  .fronti-title.simple-logo {
+    font-size: 1.3em;
+  }
+}
+@media (max-width: 800px) {
+  #fullscreenGameOverlay iframe {
+    width: 99vw;
+    height: 60vw;
+    min-height: 320px;
+  }
+    .fronti-headerbar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.7em;
+        padding: 18px 10px 0 10px;
+    }
+    .header-search {
+        width: 100%;
+        margin-left: 0;
+    }
+    .fronti-title {
+        font-size: 1.5rem;
+    }
+}
+@media (max-width: 600px) {
+  .game-grid {
+    grid-template-columns: 1fr;
+  }
+}

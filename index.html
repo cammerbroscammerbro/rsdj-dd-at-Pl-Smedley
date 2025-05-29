@@ -1,43 +1,796 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fronti - Play Games Instantly</title>
-    <!-- Google Fonts: Orbitron & Poppins -->
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="icon" type="image/png" href="logo.png">
-    <!-- Google AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9890860980845862"
-     crossorigin="anonymous"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fronti - From Idea to App in Minutes</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="icon" type="image/png" href="https://fronti.tech/logo.png" sizes="32x32">
+  <link rel="shortcut icon" type="image/png" href="https://fronti.tech/logo.png">
+  <style>
+    :root {
+      --primary: #6366f1;
+      --primary-dark: #4f46e5;
+      --secondary: linear-gradient(to right, #00ffff, #a855f7);
+      --text: #f8fafc;
+      --text-secondary: #94a3b8;
+      --bg: #0c0c0c;
+      --card-bg: rgba(15, 23, 42, 0.8);
+      --border: rgba(255, 255, 255, 0.1);
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+    
+    /* Floating background elements */
+    .bg-elements {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    
+    .bg-icon {
+      position: absolute;
+      opacity: 0.08;
+      animation: float 15s infinite linear;
+      color: #00ffff;
+    }
+    
+    @keyframes float {
+      0% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-50px) rotate(180deg); }
+      100% { transform: translateY(0) rotate(360deg); }
+    }
+    
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 1.5rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+      background: rgba(12, 12, 12, 0.8);
+      backdrop-filter: blur(10px);
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    
+    .logo img {
+      width: 40px;
+      height: 40px;
+    }
+    
+    .logo-text {
+      font-size: 1.5rem;
+      font-weight: 700;
+      background: linear-gradient(to right, #00ffff, #a855f7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+    
+    .nav-links a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+    
+    .nav-links a:hover {
+      color: #00ffff;
+    }
+    
+    .nav-buttons {
+      display: flex;
+      gap: 1rem;
+    }
+    
+    .nav-btn {
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .login-btn {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    
+    .login-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+    
+    .signup-btn {
+      background: linear-gradient(to right, #00ffff, #a855f7);
+      color: white;
+      border: none;
+    }
+    
+    .signup-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 255, 255, 0.2);
+    }
+    
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      padding: 15% 5% 5%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: visible;
+    }
+    
+    .hero-content {
+      max-width: 600px;
+      z-index: 10;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .hero h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+      background: none;
+      color: #fff;
+      -webkit-background-clip: unset;
+      -webkit-text-fill-color: unset;
+      text-align: center;
+    }
+    
+    .hero p {
+      font-size: 1.2rem;
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+      line-height: 1.6;
+      text-align: center;
+    }
+    
+    .hero-buttons {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    
+    .primary-btn {
+      padding: 1rem 2rem;
+      border-radius: 12px;
+      background: linear-gradient(to right, #00ffff, #a855f7);
+      color: white;
+      font-weight: 600;
+      font-size: 1.1rem;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    
+    .primary-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0, 255, 255, 0.2);
+    }
+    
+    .secondary-btn {
+      padding: 1rem 2rem;
+      border-radius: 12px;
+      background: transparent;
+      color: var(--text);
+      font-weight: 600;
+      font-size: 1.1rem;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    
+    .secondary-btn:hover {
+      background: rgba(255, 255, 255, 0.05);
+    }
+    
+    .hero-image {
+      display: none !important;
+    }
+    
+    /* Features Section */
+    .features {
+      padding: 8rem 5%;
+      background: rgba(0, 0, 0, 0.5);
+      position: relative;
+    }
+    
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+    
+    .section-header h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(to right, #00ffff, #a855f7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .section-header p {
+      font-size: 1.2rem;
+      color: var(--text-secondary);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .feature-card {
+      background: rgba(30, 30, 30, 0.5);
+      border-radius: 16px;
+      padding: 2rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+    
+    .feature-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 30px rgba(0, 255, 255, 0.1);
+      border-color: rgba(0, 255, 255, 0.3);
+    }
+    
+    .feature-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(to right, #00ffff, #a855f7);
+      color: white;
+      font-size: 1.5rem;
+    }
+    
+    .feature-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: white;
+    }
+    
+    .feature-card p {
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+    
+    /* How It Works */
+    .how-it-works {
+      padding: 8rem 5%;
+      position: relative;
+    }
+    
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+    }
+    
+    .step {
+      display: flex;
+      gap: 2rem;
+      align-items: flex-start;
+      position: relative;
+      padding: 2rem;
+      background: rgba(30, 30, 30, 0.5);
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+    }
+    
+    .step-number {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: linear-gradient(to right, #00ffff, #a855f7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+    
+    .step-content h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: white;
+    }
+    
+    .step-content p {
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+    
+    /* Footer */
+    footer {
+      background: #000;
+      padding: 4rem 5% 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto 3rem;
+    }
+    
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .footer-logo img {
+      width: 40px;
+      height: 40px;
+    }
+    
+    .footer-logo-text {
+      font-size: 1.5rem;
+      font-weight: 700;
+      background: linear-gradient(to right, #00ffff, #a855f7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .footer-about p {
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+    
+    .social-links {
+      display: flex;
+      gap: 1rem;
+    }
+    
+    .social-link {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+    
+    .social-link:hover {
+      background: linear-gradient(to right, #00ffff, #a855f7);
+      transform: translateY(-3px);
+    }
+    
+    .footer-links h3 {
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+      color: white;
+    }
+    
+    .footer-links ul {
+      list-style: none;
+    }
+    
+    .footer-links li {
+      margin-bottom: 0.8rem;
+    }
+    
+    .footer-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    
+    .footer-links a:hover {
+      color: #00ffff;
+    }
+    
+    .footer-bottom {
+      text-align: center;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+      .hero h1 {
+        font-size: 2.8rem;
+      }
+      
+      .hero-image {
+        width: 45%;
+        opacity: 0.7;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .hero {
+        flex-direction: column;
+        text-align: center;
+        padding-top: 20%;
+      }
+      
+      .hero-content {
+        max-width: 100%;
+      }
+      
+      .hero-buttons {
+        justify-content: center;
+      }
+      
+      .hero-image {
+        position: relative;
+        width: 100%;
+        max-width: 100%;
+        margin-top: 3rem;
+        right: auto;
+        top: auto;
+        transform: none;
+        opacity: 1;
+      }
+      
+      .nav-links {
+        display: none;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+      
+      .hero p {
+        font-size: 1rem;
+      }
+      
+      .hero-buttons {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      
+      .primary-btn, .secondary-btn {
+        width: 100%;
+        justify-content: center;
+      }
+      
+      .cta-container {
+        padding: 2rem;
+      }
+      
+      .cta h2 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-32Y4M2FMEH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-32Y4M2FMEH');
+</script>
 </head>
 <body>
-    <div class="fronti-headerbar">
-        <h1 class="fronti-title simple-logo">Fronti</h1>
-        <input type="text" id="gameSearch" class="header-search" placeholder="Search games...">
+  <!-- Background Elements -->
+  <div class="bg-elements" id="bgElements"></div>
+  
+  <!-- Navigation -->
+  <nav>
+    <a href="https://auth.fronti.tech" style="text-decoration:none;display:flex;align-items:center;gap:0.8rem;">
+      <div class="logo">
+        <img src="logo.png" alt="Fronti Logo">
+        <span class="logo-text">Fronti</span>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#how-it-works">How It Works</a>
     </div>
-    <div class="fronti-container">
-        <div class="fronti-sidebar">
-            <div class="category-tabs">
-                <button class="filter-btn active" data-category="All">All</button>
-                <button class="filter-btn" data-category="Action">Action</button>
-                <button class="filter-btn" data-category="Multiplayer">Multiplayer</button>
-                <button class="filter-btn" data-category="Shooter">Shooter</button>
-            </div>
-        </div>
-        <div id="gameGrid" class="game-grid">
-            <!-- Game cards will be injected here by JS -->
-        </div>
+    <div class="nav-buttons">
+      <button class="nav-btn login-btn">Login</button>
+      <button class="nav-btn signup-btn">Get Started</button>
     </div>
-    <!-- Modal for game iframe -->
-    <div id="gameModal" class="game-modal">
-        <div class="modal-content">
-            <span id="closeModal" class="close-btn">&times;</span>
-            <iframe id="gameIframe" src="" frameborder="0" allowfullscreen></iframe>
-        </div>
+  </nav>
+  
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Turn Your Ideas Into Apps in Minutes</h1>
+      <p>Fronti is the revolutionary AI-powered platform that transforms your descriptions into fully functional web and mobile applications. No coding required.</p>
+      <div class="hero-buttons">
+        <button class="primary-btn" onclick="window.location.href='https://auth.fronti.tech'">
+          <i class="fas fa-rocket"></i> Get Started
+        </button>
+        <button class="secondary-btn" onclick="window.location.href='#features'">
+          <i class="fas fa-bolt"></i> See Features
+        </button>
+      </div>
     </div>
-    <script src="scripts.js"></script>
+  </section>
+  
+  <!-- Features Section -->
+  <section class="features" id="features">
+    <div class="section-header">
+      <h2>Powerful Features</h2>
+      <p>Fronti combines cutting-edge AI with intuitive design to give you superpowers</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-magic"></i>
+        </div>
+        <h3>AI-Powered Generation</h3>
+        <p>Describe what you want in plain English and watch as Fronti instantly generates clean, production-ready code for your application.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-code"></i>
+        </div>
+        <h3>Full Code Control</h3>
+        <p>Get complete access to the generated source code. Edit, customize, and extend your app just like a professional developer.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-mobile-alt"></i>
+        </div>
+        <h3>Multi-Platform</h3>
+        <p>Generate web apps, mobile apps, or desktop applications from the same description. Fronti handles the platform specifics.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-rocket"></i>
+        </div>
+        <h3>Instant Deployment</h3>
+        <p>One-click deployment to our global hosting or export your code to deploy anywhere. Your app is live in seconds.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-sync-alt"></i>
+        </div>
+        <h3>Real-Time Preview</h3>
+        <p>See changes instantly as you describe them. The preview updates in real-time so you can perfect your vision.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-users"></i>
+        </div>
+        <h3>Team Collaboration</h3>
+        <p>Work together with your team in real-time. Share projects, leave comments, and build faster together.</p>
+      </div>
+    </div>
+  </section>
+  
+  <!-- How It Works -->
+  <section class="how-it-works" id="how-it-works">
+    <div class="section-header">
+      <h2>How Fronti Works</h2>
+      <p>Transforming your ideas into reality has never been easier</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-number">1</div>
+        <div class="step-content">
+          <h3>Describe Your Vision</h3>
+          <p>Tell Fronti what you want to build in simple terms. "A social media app for pet lovers" or "An e-commerce store for handmade crafts". The more details you provide, the better the result.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-number">2</div>
+        <div class="step-content">
+          <h3>AI Generates Your App</h3>
+          <p>Our advanced AI analyzes your description and generates a complete, functional application with clean code, beautiful UI, and all the core features you requested.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-number">3</div>
+        <div class="step-content">
+          <h3>Customize & Refine</h3>
+          <p>Use our intuitive editor to tweak the design, add features, or modify the generated code. The real-time preview lets you see changes instantly.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-number">4</div>
+        <div class="step-content">
+          <h3>Deploy With One Click</h3>
+          <p>Publish your app to our global hosting with a single click, or export the code to host anywhere. Your app is ready for the world in minutes, not months.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Footer -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-about">
+        <div class="footer-logo">
+          <img src="logo.png" alt="Fronti Logo">
+          <span class="footer-logo-text">Fronti</span>
+        </div>
+        <p>From idea to app in minutes. Fronti is revolutionizing how software gets built.</p>
+        <div class="social-links">
+          <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-discord"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <h3>Product</h3>
+        <ul>
+          <li><a href="#">Features</a></li>
+          <li><a href="#">Pricing</a></li>
+          <li><a href="#">Examples</a></li>
+          <li><a href="#">Updates</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h3>Resources</h3>
+        <ul>
+          <li><a href="#">Documentation</a></li>
+          <li><a href="#">Tutorials</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">API</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h3>Company</h3>
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">Legal</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2023 Fronti. All rights reserved.</p>
+    </div>
+  </footer>
+  
+  <!-- Firebase App (Core SDK) -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js"></script>
+  <script>
+    // Firebase config
+    const firebaseConfig = {
+      apiKey: "AIzaSyBo-iuUmIVgcBYWG8ltWgugkVbfqFUf4wg",
+      authDomain: "fronti-login.firebaseapp.com",
+      projectId: "fronti-login"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    // Show/hide landing content based on auth state
+    firebase.auth().onAuthStateChanged(async (user) => {
+      if (user) {
+        const token = await user.getIdToken();
+        localStorage.setItem("firebase_token", token);
+        window.location.href = "http://localhost:5000/app";
+      } else {
+        // Show landing content (if hidden)
+        if (document.getElementById("landing-content")) {
+          document.getElementById("landing-content").style.display = "block";
+        }
+      }
+    });
+  </script>
+  <script>
+    // Create floating background elements
+    const bgElements = document.getElementById('bgElements');
+    const icons = ['fa-mobile-alt', 'fa-window-maximize', 'fa-file-code', 'fa-cube', 
+                  'fa-server', 'fa-database', 'fa-code', 'fa-android', 'fa-apple', 
+                  'fa-windows', 'fa-rocket', 'fa-bolt', 'fa-magic'];
+    
+    for (let i = 0; i < 20; i++) {
+      const icon = document.createElement('i');
+      icon.className = `bg-icon fas ${icons[Math.floor(Math.random() * icons.length)]}`;
+      icon.style.left = `${Math.random() * 100}%`;
+      icon.style.top = `${Math.random() * 100}%`;
+      icon.style.fontSize = `${1 + Math.random() * 3}rem`;
+      icon.style.opacity = `${0.05 + Math.random() * 0.1}`;
+      icon.style.animationDuration = `${10 + Math.random() * 20}s`;
+      icon.style.animationDelay = `${Math.random() * 5}s`;
+      bgElements.appendChild(icon);
+    }
+    
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+    
+    // Navigation scroll effect
+    window.addEventListener('scroll', function() {
+      const nav = document.querySelector('nav');
+      if (window.scrollY > 50) {
+        nav.style.background = 'rgba(12, 12, 12, 0.95)';
+        nav.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.3)';
+      } else {
+        nav.style.background = 'rgba(12, 12, 12, 0.8)';
+        nav.style.boxShadow = 'none';
+      }
+    });
+    
+    // Login/Signup button functionality
+    document.querySelector('.login-btn').addEventListener('click', function() {
+      window.location.href = 'https://auth.fronti.tech';
+    });
+    
+    document.querySelector('.signup-btn').addEventListener('click', function() {
+      window.location.href = 'https://auth.fronti.tech';
+    });
+  </script>
+  <div id="landing-content" style="display:none;">
+    <!-- ...existing landing page content... -->
+  </div>
 </body>
 </html>
-

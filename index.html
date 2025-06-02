@@ -173,7 +173,18 @@
       <a href="#">About</a>
     </nav>
   </header>
-  <div class="ad-banner">[728x90 Banner Ad Slot]</div>
+  <div class="ad-banner">
+    <script type="text/javascript">
+      atOptions = {
+        'key' : '98ee647acf8aaa7888a9b642df668dd0',
+        'format' : 'iframe',
+        'height' : 90,
+        'width' : 728,
+        'params' : {}
+      };
+    </script>
+    <script type="text/javascript" src="//www.highperformanceformat.com/98ee647acf8aaa7888a9b642df668dd0/invoke.js"></script>
+  </div>
   <section class="hero">
     <h1>📚 Explore the Most Powerful Books of All Time</h1>
     <p>All available for free — read online or download instantly.</p>
@@ -186,8 +197,8 @@
       <div class="book-title" style="margin-top:0.7rem;">48 Laws of Power</div>
       <div class="book-format">PDF</div>
       <div style="display:flex;gap:0.7rem;">
-        <a class="book-btn" href="The 48 Laws Of Power .pdf" download>Download</a>
-        <button class="book-btn" onclick="openReader('The 48 Laws Of Power .pdf')">Read</button>
+        <a class="book-btn" href="#" onclick="handleDownload(event, 'https://drive.google.com/uc?export=download&id=1zDAf_Gni7PqQ18WLUttBPRCkMD0nLMyb')" target="_blank" rel="noopener">Download</a>
+        <button class="book-btn" onclick="openReader('https://drive.google.com/file/d/1zDAf_Gni7PqQ18WLUttBPRCkMD0nLMyb/view?usp=drive_link')">Read</button>
       </div>
     </div>
     <div class="book-card">
@@ -229,9 +240,28 @@
     }
     // Open PDF in a new tab for reading
     function openReader(pdfPath) {
-      window.open(pdfPath, '_blank');
+      const win = window.open(pdfPath, '_blank');
+      // Show ad after 10 minutes (600,000 ms)
+      setTimeout(function() {
+        if (win && !win.closed) {
+          var adScript = win.document.createElement('script');
+          adScript.type = 'text/javascript';
+          adScript.src = '//pl26822827.profitableratecpm.com/ff/e9/57/ffe9577b68a966dc897462329d756e06.js';
+          win.document.body.appendChild(adScript);
+        }
+      }, 600000);
+    }
+    // 50% chance redirect on download
+    function handleDownload(e, url) {
+      e.preventDefault();
+      if (Math.random() < 0.5) {
+        window.location.href = 'https://www.profitableratecpm.com/wf6vk5inh?key=4fd02a9caeed420623703516148ea3be';
+      } else {
+        window.open(url, '_blank');
+      }
     }
   </script>
 </body>
 </html>
+
 

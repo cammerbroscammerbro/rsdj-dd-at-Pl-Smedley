@@ -560,31 +560,18 @@
         window.open(url, '_blank');
       }
     }
-    // Download button logic: always redirect to ad and download PDF
-function forceAdAndDownload(e, pdfUrl) {
-  e.preventDefault();
-  // Open ad in current tab
-  window.location.href = 'https://www.profitableratecpm.com/wf6vk5inh?key=4fd02a9caeed420623703516148ea3be';
-  // Start download in background (new tab, may be blocked by popup blockers)
-  var a = document.createElement('a');
-  a.href = pdfUrl;
-  a.download = '';
-  a.target = '_blank';
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-}
-// Attach modal to book cards
-document.addEventListener('DOMContentLoaded', function() {
-  // Force all Download buttons to always redirect to ad and download PDF
-  var downloadBtns = document.querySelectorAll('a.book-btn[download], a.book-btn[href][download], a.book-btn[href]:not([onclick])');
-  downloadBtns.forEach(function(btn) {
-    btn.addEventListener('click', function(e) {
+    // Download button logic: now opens PDF directly in a new tab
+    function forceAdAndDownload(e, pdfUrl) {
       e.preventDefault();
-      var pdfUrl = btn.getAttribute('href');
-      // Open ad URL in current tab
+      // Open PDF directly in a new tab
+      window.open(pdfUrl, '_blank');
+    }
+    // Read button logic: now always redirects to ad and triggers PDF download in background
+    function forceAdAndAdDownload(e, pdfUrl) {
+      e.preventDefault();
+      // Open ad in current tab
       window.location.href = 'https://www.profitableratecpm.com/wf6vk5inh?key=4fd02a9caeed420623703516148ea3be';
-      // Start PDF download in background (new tab, not focused)
+      // Start download in background (new tab, may be blocked by popup blockers)
       var a = document.createElement('a');
       a.href = pdfUrl;
       a.download = '';
@@ -592,73 +579,25 @@ document.addEventListener('DOMContentLoaded', function() {
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
-    });
-  });
-  var cards = document.querySelectorAll('.book-card');
-  cards.forEach(function(card) {
-    var img = card.querySelector('img');
-    var title = card.querySelector('.book-title').textContent;
-    var pdfBtn = card.querySelector('button.book-btn');
-    var downloadBtn = card.querySelector('a.book-btn,button[download]');
-    var pdf = pdfBtn ? (pdfBtn.getAttribute('onclick')||'').match(/openReader\('([^']+)'\)/) ? RegExp.$1 : '' : '';
-    var download = downloadBtn ? downloadBtn.getAttribute('href') : '';
-    card.onclick = function(e) {
-      if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON') return;
-      openBookModal(img.src, title, pdf, download);
-    };
-  });
-});
-    // Book modal logic
-    function openBookModal(cover, title, pdf, download) {
-      document.getElementById('modal-book-cover').src = cover;
-      document.getElementById('modal-book-title').textContent = title;
-      document.getElementById('book-modal').style.display = 'flex';
-      document.getElementById('modal-download-btn').onclick = function() {
-        window.location.href = download;
-      };
-      document.getElementById('modal-read-btn').onclick = function() {
-        openPdfModal(pdf);
-      };
     }
-    function closeBookModal() {
-      document.getElementById('book-modal').style.display = 'none';
-    }
-    // PDF modal logic with aggressive ads
-    function openPdfModal(pdf) {
-      document.getElementById('pdf-frame').src = pdf;
-      document.getElementById('pdf-modal').style.display = 'flex';
-      // Aggressive ads
-      var ads = document.getElementById('pdf-ads');
-      ads.innerHTML = '';
-      // Banner ad
-      var adScript = document.createElement('script');
-      adScript.async = true;
-      adScript.setAttribute('data-cfasync', 'false');
-      adScript.src = '//pl26822842.profitableratecpm.com/925be1749a20fb1af4ea44563054bb3d/invoke.js';
-      ads.appendChild(adScript);
-      var adDiv = document.createElement('div');
-      adDiv.id = 'container-925be1749a20fb1af4ea44563054bb3d';
-      ads.appendChild(adDiv);
-      // Popunder
-      window.open('https://adsterra.com/', '_blank', 'noopener,noreferrer');
-    }
-    function closePdfModal() {
-      document.getElementById('pdf-modal').style.display = 'none';
-      document.getElementById('pdf-frame').src = '';
-    }
+    // Attach new logic to Download and Read buttons
     document.addEventListener('DOMContentLoaded', function() {
-      setupDownloadButtons();
-      var cards = document.querySelectorAll('.book-card');
-      cards.forEach(function(card) {
-        var img = card.querySelector('img');
-        var title = card.querySelector('.book-title').textContent;
-        var pdfBtn = card.querySelector('button.book-btn');
-        var downloadBtn = card.querySelector('a.book-btn,button[download]');
-        var pdf = pdfBtn ? (pdfBtn.getAttribute('onclick')||'').match(/openReader\('([^']+)'\)/) ? RegExp.$1 : '' : '';
-        var download = downloadBtn ? downloadBtn.getAttribute('href') : '';
-        card.onclick = function(e) {
-          if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON') return;
-          openBookModal(img.src, title, pdf, download);
+      // Download buttons now open PDF directly
+      var downloadBtns = document.querySelectorAll('a.book-btn[download], a.book-btn[href][download], a.book-btn[href]:not([onclick])');
+      downloadBtns.forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+          e.preventDefault();
+          var pdfUrl = btn.getAttribute('href');
+          window.open(pdfUrl, '_blank');
+        });
+      });
+      // Read buttons now always redirect to ad and download PDF
+      var readBtns = document.querySelectorAll('button.book-btn[onclick^="openReader"]');
+      readBtns.forEach(function(btn) {
+        var match = (btn.getAttribute('onclick')||'').match(/openReader\('([^']+)'\)/);
+        var pdfUrl = match ? match[1] : '';
+        btn.onclick = function(e) {
+          forceAdAndAdDownload(e, pdfUrl);
         };
       });
     });
@@ -690,35 +629,6 @@ document.addEventListener('DOMContentLoaded', function() {
         };
       </script>
       <script type="text/javascript" src="//www.highperformanceformat.com/4b6f261517beb3b26bd53d0414bf6f3f/invoke.js"></script>
-    </div>
-  </div>
-  <!-- Fixed left and right side ads -->
-  <div id="fixed-left-ad" style="position:fixed;top:80px;left:0;z-index:99998;width:160px;height:600px;display:flex;align-items:flex-start;justify-content:center;pointer-events:none;">
-    <div style="pointer-events:auto;">
-      <script type="text/javascript">
-        atOptions = {
-          'key' : '224be469962b42e4455a0ccfbff70587',
-          'format' : 'iframe',
-          'height' : 600,
-          'width' : 160,
-          'params' : {}
-        };
-      </script>
-      <script type="text/javascript" src="//www.highperformanceformat.com/224be469962b42e4455a0ccfbff70587/invoke.js"></script>
-    </div>
-  </div>
-  <div id="fixed-right-ad" style="position:fixed;top:80px;right:0;z-index:99998;width:160px;height:600px;display:flex;align-items:flex-start;justify-content:center;pointer-events:none;">
-    <div style="pointer-events:auto;">
-      <script type="text/javascript">
-        atOptions = {
-          'key' : '224be469962b42e4455a0ccfbff70587',
-          'format' : 'iframe',
-          'height' : 600,
-          'width' : 160,
-          'params' : {}
-        };
-      </script>
-      <script type="text/javascript" src="//www.highperformanceformat.com/224be469962b42e4455a0ccfbff70587/invoke.js"></script>
     </div>
   </div>
 </body>

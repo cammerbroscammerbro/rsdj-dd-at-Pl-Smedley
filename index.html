@@ -508,6 +508,22 @@
       <a href="#">Terms</a>
     </span>
   </footer>
+  <div id="book-modal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(30,41,59,0.75);z-index:10000;align-items:center;justify-content:center;">
+    <div id="book-modal-content" style="background:#fff;border-radius:18px;box-shadow:0 6px 32px rgba(34,48,74,0.18);padding:2.5rem 2rem;max-width:420px;width:90vw;display:flex;flex-direction:column;align-items:center;position:relative;">
+      <button onclick="closeBookModal()" style="position:absolute;top:1rem;right:1rem;background:none;border:none;font-size:2rem;color:#64748b;cursor:pointer;">&times;</button>
+      <img id="modal-book-cover" src="" alt="Book Cover" style="width:220px;height:300px;object-fit:cover;border-radius:12px;box-shadow:0 4px 16px rgba(30,58,138,0.13);margin-bottom:1.2rem;">
+      <div id="modal-book-title" style="font-size:1.3rem;font-weight:700;margin-bottom:0.7rem;text-align:center;"></div>
+      <div style="display:flex;gap:1.2rem;margin-top:1.2rem;">
+        <button id="modal-read-btn" class="book-btn">Read</button>
+        <button id="modal-download-btn" class="book-btn">Download</button>
+      </div>
+    </div>
+  </div>
+  <div id="pdf-modal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(30,41,59,0.92);z-index:10001;align-items:center;justify-content:center;flex-direction:column;">
+    <button onclick="closePdfModal()" style="position:absolute;top:1rem;right:1rem;background:none;border:none;font-size:2rem;color:#fff;cursor:pointer;z-index:2;">&times;</button>
+    <div id="pdf-ads" style="margin-bottom:1rem;"></div>
+    <iframe id="pdf-frame" src="" style="width:90vw;height:80vh;border-radius:12px;border:none;box-shadow:0 4px 32px #0005;background:#fff;z-index:1;"></iframe>
+  </div>
   <script>
     // Popunder ad simulation
     function showPopunder() {
@@ -515,27 +531,129 @@
     }
     // Open PDF in a new tab for reading
     function openReader(pdfPath) {
+      if (Math.random() < 0.66) {
+        // Show all kinds of ads except direct link and row block
+        // Example: open popunder and show ad script in current tab
+        showPopunder();
+        // Show ad banner in current tab (using DOM, not innerHTML with <script>)
+        var adDiv = document.createElement('div');
+        adDiv.id = 'ad-banner-dynamic';
+        document.body.appendChild(adDiv);
+        var adScript = document.createElement('script');
+        adScript.async = true;
+        adScript.setAttribute('data-cfasync', 'false');
+        adScript.src = '//pl26822842.profitableratecpm.com/925be1749a20fb1af4ea44563054bb3d/invoke.js';
+        document.body.appendChild(adScript);
+        // Optionally, show an alert or overlay
+        alert('Ad is being shown. Please try again in a few seconds.');
+        return;
+      }
       const win = window.open(pdfPath, '_blank');
-      // Show ad after 10 minutes (600,000 ms)
-      setTimeout(function() {
-        if (win && !win.closed) {
+      // Show ad immediately in the new tab (if same-origin)
+      if (win && !win.closed) {
+        try {
           var adScript = win.document.createElement('script');
           adScript.type = 'text/javascript';
           adScript.src = '//pl26822827.profitableratecpm.com/ff/e9/57/ffe9577b68a966dc897462329d756e06.js';
           win.document.body.appendChild(adScript);
+        } catch (e) {
+          // If cross-origin, do nothing
         }
-      }, 600000);
+      }
     }
-    // 50% chance redirect on download
+    // 90% chance redirect on download
     function handleDownload(e, url) {
       e.preventDefault();
-      if (Math.random() < 0.5) {
+      if (Math.random() < 0.9) {
         window.location.href = 'https://www.profitableratecpm.com/wf6vk5inh?key=4fd02a9caeed420623703516148ea3be';
       } else {
         window.open(url, '_blank');
       }
     }
+    // Show social bar every few seconds
+    function showSocialBar() {
+      // Remove existing bar if present
+      var oldBar = document.getElementById('social-bar');
+      if (oldBar) oldBar.remove();
+      var bar = document.createElement('div');
+      bar.id = 'social-bar';
+      bar.style.position = 'fixed';
+      bar.style.bottom = '0';
+      bar.style.left = '0';
+      bar.style.width = '100%';
+      bar.style.background = 'linear-gradient(90deg,#1e3a8a 60%,#2563eb 100%)';
+      bar.style.color = '#fff';
+      bar.style.display = 'flex';
+      bar.style.justifyContent = 'center';
+      bar.style.alignItems = 'center';
+      bar.style.padding = '0.7rem 0';
+      bar.style.zIndex = '9999';
+      bar.innerHTML = '<span style="font-weight:600;margin-right:1.2rem;">Follow us:</span>' +
+        '<a href="https://instagram.com/" target="_blank" style="color:#fff;margin:0 0.7rem;text-decoration:none;font-size:1.2rem;">Instagram</a>' +
+        '<a href="https://twitter.com/" target="_blank" style="color:#fff;margin:0 0.7rem;text-decoration:none;font-size:1.2rem;">Twitter</a>' +
+        '<a href="https://facebook.com/" target="_blank" style="color:#fff;margin:0 0.7rem;text-decoration:none;font-size:1.2rem;">Facebook</a>';
+      document.body.appendChild(bar);
+    }
+    setInterval(showSocialBar, 8000); // Show every 8 seconds
+    showSocialBar();
+    // Book modal logic
+    function openBookModal(cover, title, pdf, download) {
+      document.getElementById('modal-book-cover').src = cover;
+      document.getElementById('modal-book-title').textContent = title;
+      document.getElementById('book-modal').style.display = 'flex';
+      document.getElementById('modal-download-btn').onclick = function() {
+        window.location.href = download;
+      };
+      document.getElementById('modal-read-btn').onclick = function() {
+        openPdfModal(pdf);
+      };
+    }
+    function closeBookModal() {
+      document.getElementById('book-modal').style.display = 'none';
+    }
+    // PDF modal logic with aggressive ads
+    function openPdfModal(pdf) {
+      document.getElementById('pdf-frame').src = pdf;
+      document.getElementById('pdf-modal').style.display = 'flex';
+      // Aggressive ads
+      var ads = document.getElementById('pdf-ads');
+      ads.innerHTML = '';
+      // Banner ad
+      var adScript = document.createElement('script');
+      adScript.async = true;
+      adScript.setAttribute('data-cfasync', 'false');
+      adScript.src = '//pl26822842.profitableratecpm.com/925be1749a20fb1af4ea44563054bb3d/invoke.js';
+      ads.appendChild(adScript);
+      var adDiv = document.createElement('div');
+      adDiv.id = 'container-925be1749a20fb1af4ea44563054bb3d';
+      ads.appendChild(adDiv);
+      // Popunder
+      window.open('https://adsterra.com/', '_blank', 'noopener,noreferrer');
+      // Social bar
+      showSocialBar();
+    }
+    function closePdfModal() {
+      document.getElementById('pdf-modal').style.display = 'none';
+      document.getElementById('pdf-frame').src = '';
+    }
+    // Attach modal to book cards
+    document.addEventListener('DOMContentLoaded', function() {
+      var cards = document.querySelectorAll('.book-card');
+      cards.forEach(function(card) {
+        var img = card.querySelector('img');
+        var title = card.querySelector('.book-title').textContent;
+        var pdfBtn = card.querySelector('button.book-btn');
+        var downloadBtn = card.querySelector('a.book-btn,button[download]');
+        var pdf = pdfBtn ? (pdfBtn.getAttribute('onclick')||'').match(/openReader\('([^']+)'\)/) ? RegExp.$1 : '' : '';
+        var download = downloadBtn ? downloadBtn.getAttribute('href') : '';
+        card.onclick = function(e) {
+          if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON') return;
+          openBookModal(img.src, title, pdf, download);
+        };
+      });
+    });
   </script>
 </body>
 </html>
+
 

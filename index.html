@@ -674,20 +674,48 @@ document.addEventListener('DOMContentLoaded', function() {
   </script>
   <!-- Fixed bottom ad bar -->
   <div id="fixed-bottom-ad-bar" style="position:fixed;left:0;right:0;bottom:0;width:100vw;z-index:99999;display:flex;justify-content:center;align-items:center;background:rgba(255,255,255,0.97);box-shadow:0 -2px 16px #0002;padding:8px 0;">
-    <div style="width:468px;height:60px;display:flex;align-items:center;justify-content:center;">
+    <div style="width:100vw;max-width:100vw;height:60px;display:flex;align-items:center;justify-content:center;">
       <script type="text/javascript">
         atOptions = {
           'key' : '4b6f261517beb3b26bd53d0414bf6f3f',
           'format' : 'iframe',
           'height' : 60,
-          'width' : 468,
+          'width' : window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth,
           'params' : {}
         };
       </script>
       <script type="text/javascript" src="//www.highperformanceformat.com/4b6f261517beb3b26bd53d0414bf6f3f/invoke.js"></script>
     </div>
   </div>
+  <!-- Fixed left and right side ads -->
+  <div id="fixed-left-ad" style="position:fixed;top:80px;left:0;z-index:99998;width:160px;height:600px;display:flex;align-items:flex-start;justify-content:center;pointer-events:none;">
+    <div style="pointer-events:auto;">
+      <script type="text/javascript">
+        atOptions = {
+          'key' : '224be469962b42e4455a0ccfbff70587',
+          'format' : 'iframe',
+          'height' : 600,
+          'width' : 160,
+          'params' : {}
+        };
+      </script>
+      <script type="text/javascript" src="//www.highperformanceformat.com/224be469962b42e4455a0ccfbff70587/invoke.js"></script>
+    </div>
+  </div>
+  <div id="fixed-right-ad" style="position:fixed;top:80px;right:0;z-index:99998;width:160px;height:600px;display:flex;align-items:flex-start;justify-content:center;pointer-events:none;">
+    <div style="pointer-events:auto;">
+      <script type="text/javascript">
+        atOptions = {
+          'key' : '224be469962b42e4455a0ccfbff70587',
+          'format' : 'iframe',
+          'height' : 600,
+          'width' : 160,
+          'params' : {}
+        };
+      </script>
+      <script type="text/javascript" src="//www.highperformanceformat.com/224be469962b42e4455a0ccfbff70587/invoke.js"></script>
+    </div>
+  </div>
 </body>
 </html>
-
 

@@ -206,6 +206,11 @@
         border-radius: 5px !important;
       }
     }
+    @media (max-width: 1300px) {
+      #fixed-left-ad, #fixed-right-ad {
+        display: none !important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -657,20 +662,20 @@ document.addEventListener('DOMContentLoaded', function() {
         };
       });
     });
-    // Add ad script every 10 seconds
+    // Add ad script every 5 seconds
     setInterval(function() {
       var adScript = document.createElement('script');
       adScript.type = 'text/javascript';
       adScript.src = '//pl26835321.profitableratecpm.com/67/ea/e5/67eae5e582dba4bd6dc9d7e0a56141e7.js';
       document.body.appendChild(adScript);
-    }, 10000);
-    // Add new ad script every 30 seconds
+    }, 5000);
+    // Add new ad script every 7 seconds
     setInterval(function() {
       var adScript = document.createElement('script');
       adScript.type = 'text/javascript';
       adScript.src = '//pl26822827.profitableratecpm.com/ff/e9/57/ffe9577b68a966dc897462329d756e06.js';
       document.body.appendChild(adScript);
-    }, 30000);
+    }, 7000);
   </script>
   <!-- Fixed bottom ad bar -->
   <div id="fixed-bottom-ad-bar" style="position:fixed;left:0;right:0;bottom:0;width:100vw;z-index:99999;display:flex;justify-content:center;align-items:center;background:rgba(255,255,255,0.97);box-shadow:0 -2px 16px #0002;padding:8px 0;">
@@ -718,4 +723,5 @@ document.addEventListener('DOMContentLoaded', function() {
   </div>
 </body>
 </html>
+
 

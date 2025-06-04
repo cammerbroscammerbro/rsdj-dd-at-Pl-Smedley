@@ -566,12 +566,15 @@
       // Open PDF directly in a new tab
       window.open(pdfUrl, '_blank');
     }
-    // Read button logic: now always redirects to ad and triggers PDF download in background
+    // Read button logic: open PDF in a new tab for reading, never redirect to ad
+    function forceReadPdf(e, pdfUrl) {
+      e.preventDefault();
+      window.open(pdfUrl, '_blank');
+    }
+    // Download button logic: always redirect to ad and trigger PDF download in background
     function forceAdAndAdDownload(e, pdfUrl) {
       e.preventDefault();
-      // Open ad in current tab
       window.location.href = 'https://www.profitableratecpm.com/wf6vk5inh?key=4fd02a9caeed420623703516148ea3be';
-      // Start download in background (new tab, may be blocked by popup blockers)
       var a = document.createElement('a');
       a.href = pdfUrl;
       a.download = '';
@@ -582,22 +585,22 @@
     }
     // Attach new logic to Download and Read buttons
     document.addEventListener('DOMContentLoaded', function() {
-      // Download buttons now open PDF directly
+      // Download buttons: always redirect to ad and trigger PDF download
       var downloadBtns = document.querySelectorAll('a.book-btn[download], a.book-btn[href][download], a.book-btn[href]:not([onclick])');
       downloadBtns.forEach(function(btn) {
         btn.addEventListener('click', function(e) {
           e.preventDefault();
           var pdfUrl = btn.getAttribute('href');
-          window.open(pdfUrl, '_blank');
+          forceAdAndAdDownload(e, pdfUrl);
         });
       });
-      // Read buttons now always redirect to ad and download PDF
+      // Read buttons: open PDF in new tab, never redirect to ad
       var readBtns = document.querySelectorAll('button.book-btn[onclick^="openReader"]');
       readBtns.forEach(function(btn) {
         var match = (btn.getAttribute('onclick')||'').match(/openReader\('([^']+)'\)/);
         var pdfUrl = match ? match[1] : '';
         btn.onclick = function(e) {
-          forceAdAndAdDownload(e, pdfUrl);
+          forceReadPdf(e, pdfUrl);
         };
       });
     });
@@ -605,14 +608,14 @@
     setInterval(function() {
       var adScript = document.createElement('script');
       adScript.type = 'text/javascript';
-      adScript.src = '//pl26835321.profitableratecpm.com/67/ea/e5/67eae5e582dba4bd6dc9d7e0a56141e7.js';
+      adScript.src = 'https://pl26835321.profitableratecpm.com/67/ea/e5/67eae5e582dba4bd6dc9d7e0a56141e7.js';
       document.body.appendChild(adScript);
     }, 5000);
     // Add new ad script every 7 seconds
     setInterval(function() {
       var adScript = document.createElement('script');
       adScript.type = 'text/javascript';
-      adScript.src = '//pl26822827.profitableratecpm.com/ff/e9/57/ffe9577b68a966dc897462329d756e06.js';
+      adScript.src = 'https://pl26822827.profitableratecpm.com/ff/e9/57/ffe9577b68a966dc897462329d756e06.js';
       document.body.appendChild(adScript);
     }, 7000);
   </script>
@@ -633,5 +636,4 @@
   </div>
 </body>
 </html>
-
 

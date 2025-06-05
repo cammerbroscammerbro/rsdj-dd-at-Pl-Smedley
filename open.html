@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Details | fronti</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="logo.png">
+  <style>
+    body {
+      background: #f3f4f6;
+      color: #1e293b;
+      font-family: 'Inter', 'Poppins', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .container {
+      display: flex;
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 6px 32px rgba(34,48,74,0.13);
+      max-width: 900px;
+      width: 95vw;
+      min-height: 480px;
+      margin: 2rem auto;
+      overflow: hidden;
+    }
+    .cover {
+      flex: 1 1 320px;
+      background: #f7f8fa;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 320px;
+      min-height: 480px;
+    }
+    .cover img {
+      width: 260px;
+      height: 370px;
+      object-fit: cover;
+      border-radius: 14px;
+      box-shadow: 0 4px 24px #22304a22;
+      border: 3px solid #e0e7ef;
+      background: #fff;
+    }
+    .details {
+      flex: 2 1 400px;
+      padding: 2.5rem 2.5rem 2.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .book-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.7rem;
+      color: #22304a;
+    }
+    .book-desc {
+      font-size: 1.1rem;
+      color: #475569;
+      margin-bottom: 2.2rem;
+      line-height: 1.6;
+    }
+    .book-actions {
+      display: flex;
+      gap: 1.2rem;
+    }
+    .book-btn {
+      background: linear-gradient(90deg, #1e3a8a 60%, #2563eb 100%);
+      color: #fff;
+      border: none;
+      border-radius: 7px;
+      padding: 0.7rem 2.2rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 2px 8px #22304a22;
+      transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+      outline: none;
+    }
+    .book-btn:hover {
+      background: linear-gradient(90deg, #f97316 60%, #ea580c 100%);
+      color: #fff;
+      box-shadow: 0 4px 16px #f9731622;
+      transform: scale(1.07);
+    }
+    @media (max-width: 800px) {
+      .container {
+        flex-direction: column;
+        min-width: 0;
+        min-height: 0;
+      }
+      .cover {
+        min-width: 0;
+        min-height: 0;
+        padding: 2rem 0 0 0;
+      }
+      .details {
+        padding: 2rem 1.2rem 2rem 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="cover">
+      <img id="book-cover" src="" alt="Book Cover">
+    </div>
+    <div class="details">
+      <div class="book-title" id="book-title"></div>
+      <div class="book-desc" id="book-desc"></div>
+      <div class="book-actions">
+        <button class="book-btn" id="read-btn">Read</button>
+        <button class="book-btn" id="download-btn">Download</button>
+      </div>
+    </div>
+  </div>
+  <script>
+    // Book data (add more as needed)
+    const books = {
+      '48-laws-of-power': {
+        title: '48 Laws of Power',
+        cover: 'Screenshot 2025-06-02 232156.png',
+        pdf: 'ef347f42-f34d-48a9-b971-dbc92cdd32c9_Deep-Work---Rules-for-Focused-Success-in-a-Distracted-World.pdf',
+        download: 'https://drive.google.com/uc?export=download&id=1zDAf_Gni7PqQ18WLUttBPRCkMD0nLMyb',
+        desc: 'The 48 Laws of Power by Robert Greene is a modern classic on strategy, manipulation, and power dynamics. Drawing on historical examples, Greene distills centuries of wisdom into 48 essential laws for achieving, defending, and mastering power in all areas of life. A must-read for anyone interested in leadership, influence, and self-mastery.'
+      },
+      'zero-to-one': {
+        title: 'Zero to One',
+        cover: 'Screenshot 2025-06-02 233352.png',
+        pdf: 'zero to one.pdf',
+        download: 'zero to one.pdf',
+        desc: 'Zero to One by Peter Thiel explores how to build innovative startups that create new value in the world. Thiel shares his philosophy on entrepreneurship, competition, and the importance of creating something truly unique. This book is essential reading for founders, creators, and anyone interested in the future of technology and business.'
+      },
+      // Add more books here with unique keys
+    };
+
+    // Get book key from URL (e.g., open.html?book=48-laws-of-power)
+    function getBookKey() {
+      const params = new URLSearchParams(window.location.search);
+      return params.get('book');
+    }
+    const key = getBookKey();
+    const book = books[key];
+    if (book) {
+      document.getElementById('book-cover').src = book.cover;
+      document.getElementById('book-title').textContent = book.title;
+      document.getElementById('book-desc').textContent = book.desc;
+      document.getElementById('read-btn').onclick = function() {
+        window.open(book.pdf, '_blank');
+      };
+      document.getElementById('download-btn').onclick = function() {
+        window.location.href = book.download;
+      };
+      // Update page title and URL for better UX and SEO
+      document.title = `fronti | ${book.title}`;
+      const newUrl = `${window.location.origin}${window.location.pathname.replace('open.html', '')}${key}`;
+      window.history.replaceState({}, '', newUrl);
+    } else {
+      document.querySelector('.container').innerHTML = '<div style="padding:2rem;font-size:1.3rem;">Book not found.</div>';
+    }
+  </script>
+</body>
+</html>

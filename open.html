@@ -386,12 +386,13 @@
 
     document.addEventListener('DOMContentLoaded', function() {
       const key = getBookKey();
-      const book = books[key];
       if (key === 'onyx-storm') {
-        document.getElementById('onyx-storm-content').style.display = '';
-        document.getElementById('dynamic-book-content').style.display = 'none';
-        document.title = 'Onyx Storm PDF Download – Rebecca Yarros [Free & Safe]';
-      } else if (book) {
+        // Redirect to the dedicated SEO page for Onyx Storm
+        window.location.href = 'onyx-storm-rebecca-yarros-pdf-download.html';
+        return;
+      }
+      const book = books[key];
+      if (book) {
         document.getElementById('onyx-storm-content').style.display = 'none';
         document.getElementById('dynamic-book-content').style.display = '';
         document.getElementById('book-cover').src = book.cover;
@@ -414,6 +415,5 @@
     });
   </script>
 </body>
-</html>
 
 

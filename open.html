@@ -386,15 +386,14 @@
 
     document.addEventListener('DOMContentLoaded', function() {
       const key = getBookKey();
-      // Show Onyx Storm special section if selected
-      if (key === 'onyx-storm') {
+      // Accept all variants for Onyx Storm
+      const isOnyxStorm = key === 'onyx-storm' || key === 'onyx-storm-rebecca-yarros' || key === 'onyx-storm-pdf' || key === 'onyx-storm-book';
+      if (isOnyxStorm) {
         document.getElementById('onyx-storm-content').style.display = '';
         document.getElementById('dynamic-book-content').style.display = 'none';
-        // Update title and meta for SEO
         document.title = 'Onyx Storm PDF Download – Rebecca Yarros [Free & Safe]';
         const metaDesc = document.querySelector('meta[name="description"]');
         if (metaDesc) metaDesc.setAttribute('content', 'Download Onyx Storm by Rebecca Yarros in PDF format. High-quality, safe, and fast download. Get your copy now!');
-        // Schema is already present in <head>
         return;
       }
       // Show other books dynamically
@@ -415,11 +414,7 @@
         document.title = `fronti | ${book.title}`;
         const metaDesc = document.querySelector('meta[name="description"]');
         if (metaDesc) metaDesc.setAttribute('content', `Download ${book.title} in PDF format. High-quality, safe, and fast download. Get your copy now!`);
-        // Clean URL for sharing (optional, can be removed if not wanted)
-        // const newUrl = `${window.location.origin}${window.location.pathname.replace('open.html', '')}${key}`;
-        // window.history.replaceState({}, '', newUrl);
       } else {
-        // Book not found fallback
         document.getElementById('onyx-storm-content').style.display = 'none';
         document.getElementById('dynamic-book-content').style.display = 'none';
         document.body.innerHTML += '<div style="padding:2rem;font-size:1.3rem;">Book not found.</div>';

@@ -105,6 +105,14 @@
       }
     }
   </style>
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7X5018QFJD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-7X5018QFJD');
+</script>
 </head>
 <body>
   <div class="container">
@@ -118,6 +126,11 @@
         <button class="book-btn" id="read-btn">Read</button>
         <button class="book-btn" id="download-btn">Download</button>
       </div>
+      <div class="cta-section" style="margin-top:2.2rem;display:flex;flex-direction:column;gap:1.1rem;">
+        <button class="book-btn" style="background:linear-gradient(90deg,#f97316 60%,#ea580c 100%);color:#fff;" onclick="alert('We will notify you when the PDF is ready!')">Request Access</button>
+        <a href="indx.html#fantasy" class="book-btn" style="background:linear-gradient(90deg,#1e3a8a 60%,#2563eb 100%);color:#fff;text-align:center;text-decoration:none;">Explore Other Fantasy Novels</a>
+        <button class="book-btn" style="background:linear-gradient(90deg,#1e3a8a 60%,#2563eb 100%);color:#fff;" onclick="alert('Suggest a book feature coming soon!')">Suggest a Book</button>
+      </div>
     </div>
   </div>
   <script>
@@ -127,14 +140,6 @@
         title: '48 Laws of Power',
         cover: 'Screenshot 2025-06-02 232156.png',
         pdf: 'ef347f42-f34d-48a9-b971-dbc92cdd32c9_Deep-Work---Rules-for-Focused-Success-in-a-Distracted-World.pdf',
-        download: 'https://drive.google.com/uc?export=download&id=1zDAf_Gni7PqQ18WLUttBPRCkMD0nLMyb',
-        desc: 'The 48 Laws of Power by Robert Greene is a modern classic on strategy, manipulation, and power dynamics. Drawing on historical examples, Greene distills centuries of wisdom into 48 essential laws for achieving, defending, and mastering power in all areas of life. A must-read for anyone interested in leadership, influence, and self-mastery.'
-      },
-      'zero-to-one': {
-        title: 'Zero to One',
-        cover: 'Screenshot 2025-06-02 233352.png',
-        pdf: 'zero to one.pdf',
-        download: 'zero to one.pdf',
         desc: 'Zero to One by Peter Thiel explores how to build innovative startups that create new value in the world. Thiel shares his philosophy on entrepreneurship, competition, and the importance of creating something truly unique. This book is essential reading for founders, creators, and anyone interested in the future of technology and business.'
       },
       'ego-is-the-enemy': {

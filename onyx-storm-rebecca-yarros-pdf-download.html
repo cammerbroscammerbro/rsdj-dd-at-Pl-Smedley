@@ -165,29 +165,46 @@
 </script>
 </head>
 <body>
-  <div class="container">
-    <div class="cover">
-      <img id="book-cover" src="Screenshot 2025-06-08 175639.png" alt="Onyx Storm by Rebecca Yarros book cover">
-    </div>
-    <div class="details">
-      <h1>Download Onyx Storm PDF by Rebecca Yarros</h1>
-      <h2>About the Book</h2>
-      <p>Onyx Storm by Rebecca Yarros is the highly anticipated third book in the Empyrean fantasy series. Dive into a world of dragons, war, and destiny as Violet Sorrengail faces new challenges and alliances. This partial preview PDF lets you experience the magic before the full release.</p>
-      <h2>PDF File Info</h2>
-      <ul>
-        <li>Format: PDF</li>
-        <li>Pages: 21 (partial preview)</li>
-        <li>Size: 2.1 MB</li>
-      </ul>
-      <a href="Preview-Onyx-Storm-by-Rebecca-Yarros.pdf" class="download-btn" target="_blank">📥 Download Now</a>
-      <div class="share-buttons">
-        <a href="https://twitter.com/intent/tweet?text=Free+PDF+Download+of+Onyx+Storm+by+Rebecca+Yarros&url=https://www.fronti.tech/onyx-storm-rebecca-yarros-pdf-download.htm" target="_blank">Tweet</a>
-        <a href="https://www.facebook.com/sharer/sharer.php?u=https://www.fronti.tech/onyx-storm-rebecca-yarros-pdf-download.htm" target="_blank">Share</a>
+  <div id="onyx-storm-content" style="display:none">
+    <div class="container">
+      <div class="cover">
+        <img src="Screenshot 2025-06-08 175639.png" alt="Onyx Storm by Rebecca Yarros book cover">
       </div>
-      <section class="comments">
-        <h2>Reader Reviews</h2>
-        <p>No reviews yet. Be the first to leave your thoughts!</p>
-      </section>
+      <div class="details">
+        <h1>Download Onyx Storm PDF by Rebecca Yarros</h1>
+        <h2>About the Book</h2>
+        <p>Onyx Storm by Rebecca Yarros is the highly anticipated third book in the Empyrean fantasy series. Dive into a world of dragons, war, and destiny as Violet Sorrengail faces new challenges and alliances. This partial preview PDF lets you experience the magic before the full release.</p>
+        <h2>PDF File Info</h2>
+        <ul>
+          <li>Format: PDF</li>
+          <li>Pages: 21 (partial preview)</li>
+          <li>Size: 2.1 MB</li>
+        </ul>
+        <a href="Preview-Onyx-Storm-by-Rebecca-Yarros.pdf" class="download-btn" target="_blank">📥 Download Now</a>
+        <div class="share-buttons">
+          <a href="https://twitter.com/intent/tweet?text=Free+PDF+Download+of+Onyx+Storm+by+Rebecca+Yarros&url=https://www.fronti.tech/onyx-storm-rebecca-yarros-pdf-download.htm" target="_blank">Tweet</a>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://www.fronti.tech/onyx-storm-rebecca-yarros-pdf-download.htm" target="_blank">Share</a>
+        </div>
+        <section class="comments">
+          <h2>Reader Reviews</h2>
+          <p>No reviews yet. Be the first to leave your thoughts!</p>
+        </section>
+      </div>
+    </div>
+  </div>
+  <div id="dynamic-book-content">
+    <div class="container">
+      <div class="cover">
+        <img id="book-cover" src="" alt="Book Cover">
+      </div>
+      <div class="details">
+        <div class="book-title" id="book-title"></div>
+        <div class="book-desc" id="book-desc"></div>
+        <div class="book-actions">
+          <button class="book-btn" id="read-btn">Read</button>
+          <button class="book-btn" id="download-btn">Download</button>
+        </div>
+      </div>
     </div>
   </div>
   <script>
@@ -370,7 +387,13 @@
     }
     const key = getBookKey();
     const book = books[key];
-    if (book) {
+    if (key === 'onyx-storm') {
+      document.getElementById('onyx-storm-content').style.display = '';
+      document.getElementById('dynamic-book-content').style.display = 'none';
+      document.title = 'Onyx Storm PDF Download – Rebecca Yarros [Free & Safe]';
+    } else if (book) {
+      document.getElementById('onyx-storm-content').style.display = 'none';
+      document.getElementById('dynamic-book-content').style.display = '';
       document.getElementById('book-cover').src = book.cover;
       document.getElementById('book-title').textContent = book.title;
       document.getElementById('book-desc').textContent = book.desc;
@@ -378,14 +401,15 @@
         window.open(book.pdf, '_blank');
       };
       document.getElementById('download-btn').onclick = function() {
-        window.location.href = book.download;
+        window.location.href = book.download || book.pdf;
       };
-      // Update page title and URL for better UX and SEO
       document.title = `fronti | ${book.title}`;
       const newUrl = `${window.location.origin}${window.location.pathname.replace('open.html', '')}${key}`;
       window.history.replaceState({}, '', newUrl);
     } else {
-      document.querySelector('.container').innerHTML = '<div style="padding:2rem;font-size:1.3rem;">Book not found.</div>';
+      document.getElementById('onyx-storm-content').style.display = 'none';
+      document.getElementById('dynamic-book-content').style.display = 'none';
+      document.body.innerHTML += '<div style="padding:2rem;font-size:1.3rem;">Book not found.</div>';
     }
   </script>
 </body>

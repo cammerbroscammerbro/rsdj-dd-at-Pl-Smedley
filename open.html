@@ -3,9 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Book Details | fronti</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <title>Onyx Storm PDF Download – Rebecca Yarros [Free & Safe]</title>
+  <meta name="description" content="Download Onyx Storm by Rebecca Yarros in PDF format. High-quality, safe, and fast download. Get your copy now!">
   <link rel="icon" type="image/png" href="logo.png">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Book",
+    "name": "Onyx Storm",
+    "author": {
+      "@type": "Person",
+      "name": "Rebecca Yarros"
+    },
+    "bookFormat": "https://schema.org/EBook",
+    "inLanguage": "en",
+    "description": "Download the PDF version of Onyx Storm by Rebecca Yarros. This fantasy novel continues the Empyrean saga.",
+    "url": "https://www.fronti.tech/onyx-storm-rebecca-yarros-pdf-download.htm"
+  }
+  </script>
   <style>
     body {
       background: #f3f4f6;
@@ -89,6 +104,41 @@
       box-shadow: 0 4px 16px #f9731622;
       transform: scale(1.07);
     }
+    .download-btn {
+      background: #1e90ff;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      display: inline-block;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+    .share-buttons {
+      margin-top: 1.5rem;
+      display: flex;
+      gap: 1.2rem;
+    }
+    .share-buttons a {
+      background: #f3f4f6;
+      color: #1e3a8a;
+      border: 1px solid #1e3a8a;
+      border-radius: 6px;
+      padding: 8px 16px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background 0.2s, color 0.2s;
+    }
+    .share-buttons a:hover {
+      background: #1e3a8a;
+      color: #fff;
+    }
+    .comments {
+      margin-top: 2.5rem;
+      background: #f7f8fa;
+      border-radius: 10px;
+      padding: 1.2rem;
+    }
     @media (max-width: 800px) {
       .container {
         flex-direction: column;
@@ -115,21 +165,45 @@
 </script>
 </head>
 <body>
-  <div class="container">
-    <div class="cover">
-      <img id="book-cover" src="" alt="Book Cover">
-    </div>
-    <div class="details">
-      <div class="book-title" id="book-title"></div>
-      <div class="book-desc" id="book-desc"></div>
-      <div class="book-actions">
-        <button class="book-btn" id="read-btn">Read</button>
-        <button class="book-btn" id="download-btn">Download</button>
+  <div id="onyx-storm-content" style="display:none">
+    <div class="container">
+      <div class="cover">
+        <img src="Screenshot 2025-06-08 175639.png" alt="Onyx Storm by Rebecca Yarros book cover">
       </div>
-      <div class="cta-section" style="margin-top:2.2rem;display:flex;flex-direction:column;gap:1.1rem;">
-        <button class="book-btn" style="background:linear-gradient(90deg,#f97316 60%,#ea580c 100%);color:#fff;" onclick="alert('We will notify you when the PDF is ready!')">Request Access</button>
-        <a href="indx.html#fantasy" class="book-btn" style="background:linear-gradient(90deg,#1e3a8a 60%,#2563eb 100%);color:#fff;text-align:center;text-decoration:none;">Explore Other Fantasy Novels</a>
-        <button class="book-btn" style="background:linear-gradient(90deg,#1e3a8a 60%,#2563eb 100%);color:#fff;" onclick="alert('Suggest a book feature coming soon!')">Suggest a Book</button>
+      <div class="details">
+        <h1>Download Onyx Storm PDF by Rebecca Yarros</h1>
+        <h2>About the Book</h2>
+        <p>Onyx Storm by Rebecca Yarros is the highly anticipated third book in the Empyrean fantasy series. Dive into a world of dragons, war, and destiny as Violet Sorrengail faces new challenges and alliances. This partial preview PDF lets you experience the magic before the full release.</p>
+        <h2>PDF File Info</h2>
+        <ul>
+          <li>Format: PDF</li>
+          <li>Pages: 21 (partial preview)</li>
+          <li>Size: 2.1 MB</li>
+        </ul>
+        <a href="Preview-Onyx-Storm-by-Rebecca-Yarros.pdf" class="download-btn" target="_blank">📥 Download Now</a>
+        <div class="share-buttons">
+          <a href="https://twitter.com/intent/tweet?text=Free+PDF+Download+of+Onyx+Storm+by+Rebecca+Yarros&url=https://www.fronti.tech/onyx-storm-rebecca-yarros-pdf-download.htm" target="_blank">Tweet</a>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://www.fronti.tech/onyx-storm-rebecca-yarros-pdf-download.htm" target="_blank">Share</a>
+        </div>
+        <section class="comments">
+          <h2>Reader Reviews</h2>
+          <p>No reviews yet. Be the first to leave your thoughts!</p>
+        </section>
+      </div>
+    </div>
+  </div>
+  <div id="dynamic-book-content">
+    <div class="container">
+      <div class="cover">
+        <img id="book-cover" src="" alt="Book Cover">
+      </div>
+      <div class="details">
+        <div class="book-title" id="book-title"></div>
+        <div class="book-desc" id="book-desc"></div>
+        <div class="book-actions">
+          <button class="book-btn" id="read-btn">Read</button>
+          <button class="book-btn" id="download-btn">Download</button>
+        </div>
       </div>
     </div>
   </div>
@@ -289,42 +363,57 @@
         download: 'Steve-Jobs-PDFDrive-1.pdf',
         desc: 'Walter Isaacson’s biography of Steve Jobs offers an intimate look at the life and mind of Apple’s visionary founder.'
       },
+      'onyx-storm': {
+        title: 'Onyx Storm',
+        cover: 'Screenshot 2025-06-08 175639.png',
+        pdf: 'Preview-Onyx-Storm-by-Rebecca-Yarros.pdf',
+        desc: 'Onyx Storm by Rebecca Yarros is the highly anticipated third book in the Empyrean fantasy series. Dive into a world of dragons, war, and destiny as Violet Sorrengail faces new challenges and alliances. This partial preview PDF lets you experience the magic before the full release.'
+      }
       // Add more books here with unique keys
     };
 
-    // Normalize book key from URL to kebab-case
     function normalizeKey(str) {
       return str
         .toLowerCase()
         .replace(/[^a-z0-9]+/g, '-')
         .replace(/(^-|-$)/g, '');
     }
-    // Get book key from URL (e.g., open.html?book=48-laws-of-power)
     function getBookKey() {
       const params = new URLSearchParams(window.location.search);
       const raw = params.get('book');
       return raw ? normalizeKey(raw) : null;
     }
-    const key = getBookKey();
-    const book = books[key];
-    if (book) {
-      document.getElementById('book-cover').src = book.cover;
-      document.getElementById('book-title').textContent = book.title;
-      document.getElementById('book-desc').textContent = book.desc;
-      document.getElementById('read-btn').onclick = function() {
-        window.open(book.pdf, '_blank');
-      };
-      document.getElementById('download-btn').onclick = function() {
-        window.location.href = book.download;
-      };
-      // Update page title and URL for better UX and SEO
-      document.title = `fronti | ${book.title}`;
-      const newUrl = `${window.location.origin}${window.location.pathname.replace('open.html', '')}${key}`;
-      window.history.replaceState({}, '', newUrl);
-    } else {
-      document.querySelector('.container').innerHTML = '<div style="padding:2rem;font-size:1.3rem;">Book not found.</div>';
-    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const key = getBookKey();
+      const book = books[key];
+      if (key === 'onyx-storm') {
+        document.getElementById('onyx-storm-content').style.display = '';
+        document.getElementById('dynamic-book-content').style.display = 'none';
+        document.title = 'Onyx Storm PDF Download – Rebecca Yarros [Free & Safe]';
+      } else if (book) {
+        document.getElementById('onyx-storm-content').style.display = 'none';
+        document.getElementById('dynamic-book-content').style.display = '';
+        document.getElementById('book-cover').src = book.cover;
+        document.getElementById('book-title').textContent = book.title;
+        document.getElementById('book-desc').textContent = book.desc;
+        document.getElementById('read-btn').onclick = function() {
+          window.open(book.pdf, '_blank');
+        };
+        document.getElementById('download-btn').onclick = function() {
+          window.location.href = book.download || book.pdf;
+        };
+        document.title = `fronti | ${book.title}`;
+        const newUrl = `${window.location.origin}${window.location.pathname.replace('open.html', '')}${key}`;
+        window.history.replaceState({}, '', newUrl);
+      } else {
+        document.getElementById('onyx-storm-content').style.display = 'none';
+        document.getElementById('dynamic-book-content').style.display = 'none';
+        document.body.innerHTML += '<div style="padding:2rem;font-size:1.3rem;">Book not found.</div>';
+      }
+    });
   </script>
 </body>
 </html>
+
 
